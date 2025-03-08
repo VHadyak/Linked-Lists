@@ -1,5 +1,5 @@
 // Linked List class
-class LinkedList {
+export default class LinkedList {
   constructor() {
     this._head = null;
     this._tail = null;
@@ -22,7 +22,7 @@ class LinkedList {
 
       current.nextNode = new Node(value);
 
-      // If last node doesn't have a neighbor, classify it as a tail node
+      // If it's the last node in the list, make it as a tail node
       if (current.nextNode.nextNode === null) {
         this._tail = current.nextNode;
       }
@@ -94,8 +94,8 @@ class LinkedList {
       return;
     }
 
-    let prev = null;
     let current = this._head;
+    let prev = null;
 
     while (current.nextNode !== null) {
       prev = current;
@@ -142,7 +142,7 @@ class LinkedList {
 
     while (current) {
       str += `( ${current.value} ) -> `; // Show all nodes
-      current = current.nextNode; // Iterate until the tail node
+      current = current.nextNode;
     }
     str += null; // Display tail node's neighbor as 'null'
     return str;
@@ -221,7 +221,7 @@ class LinkedList {
 
     while (current) {
       if (count === index) {
-        // Set previous node's next to current node's next, which will remove the current node
+        // Set previous node's 'next' to current node's 'next', which will remove the current node
         prev.nextNode = current.nextNode;
         // Set a tail node if the node last in the list
         if (current.nextNode === null) {
@@ -235,6 +235,7 @@ class LinkedList {
       current = current.nextNode;
     }
 
+    // Show error if no node was found at that index
     console.error("Index out of bounds!");
   }
 }
@@ -246,15 +247,3 @@ class Node {
     this.nextNode = null;
   }
 }
-
-const list = new LinkedList();
-
-list.append("dog");
-list.append("cat");
-list.prepend("parrot");
-
-//list.insertAt("Vlad", 2);
-list.removeAt(2);
-
-//console.log(list.tail());
-console.log(list.toString());
